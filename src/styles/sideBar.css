@@ -1,0 +1,71 @@
+.provider-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.provider-logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.provider-section h5 {
+  font-weight: bold;
+  margin: 10px 0px 5px 0px;
+}
+
+.provider-section p {
+  color: rgb(20 20 20);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+}
+
+.provider-section .account-info {
+  display: flex;
+}
+
+.provider-section .account-info svg {
+  margin: 0px 7px 6px 7px;
+  color: rgb(143 143 143);
+}
+
+.repos-separator {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: rgb(143 143 143);
+  margin: 0.7rem 0.5rem 0rem 1rem;
+}
+
+.repos-count {
+  color: rgb(143 143 143);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+}
+
+.configure-account {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.configure-account button {
+  color: rgb(138 5 255);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.configure-account button svg {
+  margin-left: 6px;
+}

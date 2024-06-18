@@ -1,0 +1,15 @@
+.repo-list-container {
+  overflow: auto;
+  max-height: 300px;
+  width: 100%;
+  border: 1px solid #e4dfdf;
+  box-shadow: inset 0 0 6px rgba(75, 69, 69, 0.1);
+}
+
+.repo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e4dfdf;
+}

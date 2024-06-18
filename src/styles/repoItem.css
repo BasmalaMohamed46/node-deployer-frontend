@@ -1,0 +1,59 @@
+.repo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.repo-info {
+  display: flex;
+  align-items: center;
+}
+
+.repo-item .provider {
+  width: 20px;
+  height: 20px;
+  margin: 8px 9px 8px 2px;
+}
+
+.repo-item .repo-name {
+  color: rgb(107 107 107);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+}
+
+.separator {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: rgb(143 143 143);
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+.repo-time {
+  color: rgb(143 143 143);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.connect-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0.375rem 0.5rem;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.13px;
+  cursor: pointer;
+}
+
+.connect-button:hover {
+  background-color: rgb(138 5 255);
+}
