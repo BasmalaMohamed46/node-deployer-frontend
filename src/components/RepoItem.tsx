@@ -7,22 +7,29 @@ interface RepoItemProps {
 }
 
 function RepoItem({ repo }: RepoItemProps) {
-  const updatedTime = parseISO(repo.updatedAt);
+  const updatedTime = parseISO(repo.updated_at);
   const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
 
-  const imageUrl = `/images/${repo.provider.toLowerCase()}.png`;
+  // const imageUrl = `/images/${repo.provider.toLowerCase()}.png`;
 
   return (
     <div className="repo-item">
       <div className="repo-info">
-        <img
+        {/* <img
           src={imageUrl}
           alt={`${repo.provider} logo`}
           className="provider"
-        />
-        <span className="repo-name">
-          {repo.account} / {repo.name}
-        </span>
+        /> */}
+        <a
+          href={repo.http_url_to_repo}
+          className="repo-link"
+          title={repo.http_url_to_repo}
+        >
+          <span className="repo-name">
+            {/* {repo.account} / {repo.name} */}
+            {repo.path_with_namespace}
+          </span>
+        </a>
         <span className="separator"></span>
         <span className="repo-time">{timeDifference}</span>
       </div>

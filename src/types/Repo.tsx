@@ -1,15 +1,6 @@
 export interface Repo {
-  id: string;
-  url: string;
-  name: string;
-  userId: string;
-  dockerImage?: DockerImage;
-  event: string;
-  env: string;
-  createdAt: string;
-  updatedAt: string;
-  provider: string;
-  account?: string;
+  id: number;
+  path_with_namespace: string;
+  updated_at: string;
+  http_url_to_repo: string;
 }
-
-export interface DockerImage {}

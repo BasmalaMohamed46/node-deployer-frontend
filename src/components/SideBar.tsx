@@ -2,19 +2,9 @@
 import "../styles/sideBar.css";
 
 function SideBar() {
-  // const accessToken = localStorage.getItem("accessToken");
 
-  const handleConfigureClick = () => {
-    // const response = fetch("http://localhost:3000/auth/gitlab/callback/repo", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${accessToken}`,
-    //   },
-    // });
-    // console.log(response.data);
-    // // setRepos(data.repositories);
-  };
+  // const handleConfigureClick = () => {
+  // };
 
   return (
     <div className="sidebar">
@@ -57,7 +47,7 @@ function SideBar() {
             <span className="repos-separator"></span>
             <span className="repos-count">1 repo</span>
           </div>
-          <div className="configure-account">
+          {/* <div className="configure-account">
             <button
               type="button"
               data-testid="git-account-button"
@@ -78,7 +68,7 @@ function SideBar() {
                 </svg>
               </div>
             </button>
-          </div>
+          </div> */}
         </a>
       </div>
     </div>

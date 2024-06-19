@@ -25,6 +25,10 @@
   font-weight: 400;
 }
 
+.repo-link {
+  text-decoration: none;
+}
+
 .separator {
   width: 0.2rem;
   height: 0.2rem;

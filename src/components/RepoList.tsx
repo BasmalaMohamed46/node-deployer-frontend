@@ -20,8 +20,8 @@ function RepoList() {
             },
           }
         );
-        // setRepos(response.data);
-        console.log(response.data);
+        setRepos(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching repos:", error);
       }
