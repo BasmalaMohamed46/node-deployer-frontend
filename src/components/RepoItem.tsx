@@ -4,22 +4,25 @@ import { formatDistanceToNow, parseISO } from "date-fns";
 
 interface RepoItemProps {
   repo: Repo;
+  provider: string | null; 
 }
 
-function RepoItem({ repo }: RepoItemProps) {
+function RepoItem({ repo, provider }: RepoItemProps) {
   const updatedTime = parseISO(repo.updated_at);
   const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
 
-  // const imageUrl = `/images/${repo.provider.toLowerCase()}.png`;
+  const imageUrl = provider ? `/images/${provider.toLowerCase()}.png` : '';
 
   return (
     <div className="repo-item">
       <div className="repo-info">
-        {/* <img
-          src={imageUrl}
-          alt={`${repo.provider} logo`}
-          className="provider"
-        /> */}
+        {provider && (
+          <img
+            src={imageUrl}
+            alt={`${provider} logo`}
+            className="provider"
+          />
+        )}
         <a
           href={repo.http_url_to_repo}
           className="repo-link"

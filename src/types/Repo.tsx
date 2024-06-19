@@ -3,4 +3,5 @@ export interface Repo {
   path_with_namespace: string;
   updated_at: string;
   http_url_to_repo: string;
+  provider: string;
 }
