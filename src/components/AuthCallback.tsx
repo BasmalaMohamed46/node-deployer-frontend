@@ -4,14 +4,15 @@ const AuthCallback = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("access_token");
-    console.log(accessToken);
+    const provider = params.get("provider");
 
-    if (accessToken) {
+    if (accessToken && provider) {
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("provider", provider);
 
       window.location.href = "/dashboard";
     } else {
-      console.error("No access token found in URL");
+      console.error("No access token and provider found in URL");
     }
   }, []);
 

@@ -1,13 +1,15 @@
 import RepoList from "./RepoList";
 import SideBar from "./SideBar";
 import "../styles/dashboard.css";
-import { DashboardResponse } from '../types/dashboardResponse';
+import { DashboardResponse } from "../types/DashboardResponse";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Dashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const accessToken = localStorage.getItem("accessToken");
+  const provider = localStorage.getItem("provider");
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -15,7 +17,7 @@ function Dashboard() {
 
       try {
         const response = await axios.get<DashboardResponse>(
-          "http://localhost:3000/auth/gitlab/callback/repo",
+          `http://localhost:3000/repo/${provider}/callback`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -23,15 +25,31 @@ function Dashboard() {
           }
         );
         setData(response.data);
-        console.log("Repos:", response.data.repos);
       } catch (error) {
-        console.error("Error fetching repos:", error);
         console.error("Error:", error);
       }
     };
 
     fetchRepos();
-  }, [accessToken]);
+  }, [accessToken, provider]);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredData = data
+    ? {
+        ...data,
+        repos: data.repos.filter(
+          (repo) =>
+            repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            repo.namespace.path
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            repo.path.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+      }
+    : null;
 
   return (
     <div className="container">
@@ -53,15 +71,17 @@ function Dashboard() {
                   type="text"
                   placeholder="Search"
                   className="search-input"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
                 />
                 <i className="fas fa-search search-icon"></i>
               </div>
-              {data && <RepoList data={data} />}
+              {filteredData && <RepoList data={filteredData} />}
             </div>
           </div>
         </div>
         <div className="col-lg-5 col-md-12">
-        {data && <SideBar data={data} />}
+          {data && <SideBar data={data} />}
         </div>
       </div>
     </div>

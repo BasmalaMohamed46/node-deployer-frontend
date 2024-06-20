@@ -1,5 +1,5 @@
 import RepoItem from "./RepoItem";
-import { DashboardResponse } from "../types/dashboardResponse";
+import { DashboardResponse } from "../types/DashboardResponse";
 import "../styles/repoList.css";
 
 interface RepoListProps {
@@ -7,11 +7,12 @@ interface RepoListProps {
 }
 
 function RepoList({ data }: RepoListProps) {
+
   return (
     <div className="repo-list-container">
       <div className="repo-list">
         {data.repos.map((repo) => (
-          <RepoItem key={repo.id} repo={repo} provider={data.provider} />
+          <RepoItem key={repo.id} repo={repo} />
         ))}
       </div>
     </div>

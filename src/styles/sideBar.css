@@ -24,6 +24,10 @@
   font-weight: 400;
 }
 
+.user-link {
+  text-decoration: none;
+}
+
 .provider-section .account-info {
   display: flex;
 }

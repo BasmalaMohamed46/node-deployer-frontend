@@ -61,3 +61,18 @@
 .connect-button:hover {
   background-color: rgb(138 5 255);
 }
+
+@media (max-width: 450px) {
+  .repo-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .connect-button {
+    margin-top: 10px;
+  }
+}

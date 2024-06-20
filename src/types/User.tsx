@@ -1,4 +1,4 @@
-export interface User{
-    username:string,
-    web_url:string
+export interface User {
+  name: string;
+  web_url: string;
 }

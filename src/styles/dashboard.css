@@ -87,10 +87,12 @@
   }
 
   .search-input {
-    padding: 5px 35px 5px 10px;
+    padding: 5px 35px 5px 35px;
+    font-size: 0.875rem;
   }
 
   .search-icon {
     left: 10px;
+    font-size: 1rem;
   }
 }

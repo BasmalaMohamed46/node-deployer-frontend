@@ -4,4 +4,9 @@ export interface Repo {
   updated_at: string;
   http_url_to_repo: string;
   provider: string;
+  name: string;
+  namespace: {
+    path: string;
+  };
+  path: string;
 }
