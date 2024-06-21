@@ -27,6 +27,5 @@ export default function Login() {
 				</div>
 			</div>
 		</div>
-		// <LoginButton icon={faGithub} text="Github" link="https://github.com/"/>
 	);
 }
