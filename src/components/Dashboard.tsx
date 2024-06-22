@@ -17,7 +17,7 @@ function Dashboard() {
 
       try {
         const response = await axios.get<DashboardResponse>(
-          `http://localhost:3000/repo/${provider}/callback`,
+          `http://localhost:3000/dashboard/${provider}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
