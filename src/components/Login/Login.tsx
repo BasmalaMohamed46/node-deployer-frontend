@@ -1,19 +1,14 @@
 import styles from './Login.module.css';
-import { faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGitlab } from '@fortawesome/free-brands-svg-icons';
 import Logo from '../Logo/Logo';
 import LoginButton from './LoginButton';
+import LoginButtonType from '../../types/LoginButtonType';
 
 export default function Login() {
-	type btnType = {
-		icon: IconDefinition;
-		text: string;
-		link: string;
-	};
-
-	const btns: btnType[] = [
-		{ icon: faGithub, text: 'Github', link: 'https://github.com/' },
-		{ icon: faGitlab, text: 'Gitlab', link: 'https://gitlab.com/' },
+	const btns: LoginButtonType[] = [
+		{ icon: faGitlab, text: 'Gitlab', provider: 'gitlab' },
+		{ icon: faGithub, text: 'Github', provider: 'github' },
 	];
 	return (
 		<div className={styles.container}>
@@ -22,7 +17,7 @@ export default function Login() {
 				<h2>Sign In</h2>
 				<div className={styles.btnContainer}>
 					{btns.map((btn, index) => {
-						return <LoginButton icon={btn.icon} text={btn.text} link={btn.link} key={index} />;
+						return <LoginButton {...btn} key={index} />;
 					})}
 				</div>
 			</div>
