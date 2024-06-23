@@ -1,0 +1,17 @@
+.loginButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	max-width: 100px;
+	padding: 0.25rem 0.75rem;
+	border: 1px solid #ccc;
+	text-decoration: none;
+	color: black;
+	transition: 0.3s;
+
+	&:hover {
+		background-color: black;
+		color: white;
+	}
+}
