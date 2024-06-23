@@ -1,0 +1,59 @@
+.Environment {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .variable {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .variable input {
+    margin-right: 10px;
+    height:40px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    border-color: black;
+    transition: border-color 0.3s ease;
+    width: 50%;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+  
+  .variable input:focus {
+    border-color: #007bff;
+  }
+  
+  .btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:active {
+    transform: scale(0.95);
+  }
+  
+  .btn:focus{
+    outline: none;
+  }
+  
+  .btn + .btn {
+    margin-left: 5px;
+  }
+  
+  .icon-trash{
+    color: #c62828;
+    cursor: pointer;
+  }
+
+  .btn-generate{
+    font-size: 13px !important;
+    color:#7e57c2 !important;
+    
+  }
