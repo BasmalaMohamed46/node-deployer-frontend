@@ -1,52 +1,65 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import ReactSVG from "../assets/react.svg";
+
+import "../styles/navbar.css";
 
 const NavBar = () => {
   return (
-    <Navbar
-      bg="white"
-      data-bs-theme="light"
-      className="border-bottom border-black border-2"
+    <header
+      id="header"
+      className="header d-flex align-items-center sticky-top my-0 shadow-sm"
     >
-      <Container fluid>
-        <Navbar.Brand as={Link} to="/" className="me-5">
-          <img
-            alt=""
-            src={ReactSVG}
-            width="30"
-            height="30"
-            className="d-inline-block align-top me-2"
-          />
-          React Bootstrap
-        </Navbar.Brand>
-        <Nav className="me-auto fs-5">
-          <Nav.Link as={Link} to="/product">
-            Product
-          </Nav.Link>
-          <Nav.Link as={Link} to="/pricing">
-            Pricing
-          </Nav.Link>
-          <Nav.Link as={Link} to="/about">
-            About
-          </Nav.Link>
-        </Nav>
-        <Nav className="fs-5">
-          <Nav.Link as={Link} to="/login" className="me-3">
-            Login
-          </Nav.Link>
-          <Nav.Link
-            as={Link}
-            to="/signup"
-            className="me-3 bg-black text-bg-dark"
-          >
-            SignUp
-          </Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+      <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
+        <Link
+          to="index.html"
+          className="logo d-flex align-items-center me-auto me-xl-0 nav-link"
+        >
+          <h1 className="sitename">Render </h1>
+          <span>Clone</span>
+        </Link>
+
+        <nav id="navmenu" className="navmenu">
+          <ul>
+            <li>
+              <Link to="#hero" className="active nav-link">
+                Home
+                <br />
+              </Link>
+            </li>
+            <li>
+              <Link to="#featured-services" className=" nav-link">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link to="#about" className=" nav-link">
+                About
+              </Link>
+            </li>
+
+            <li>
+              <Link to="#pricing" className=" nav-link">
+                Pricing
+              </Link>
+            </li>
+            <li>
+              <Link to="#team" className=" nav-link">
+                Team
+              </Link>
+            </li>
+            <li>
+              <Link to="#contact" className="nav-link">
+                Contact
+              </Link>
+            </li>
+          </ul>
+          <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <Link className="btn-getstarted nav-link" to="index.html#about">
+          Get Started
+        </Link>
+      </div>
+    </header>
   );
 };
 
