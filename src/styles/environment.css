@@ -3,48 +3,54 @@
     padding: 20px;
   }
   
+  .variable-wrapper {
+    margin-bottom: 10px;
+  }
+  
   .variable {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
   }
   
   .variable input {
     margin-right: 10px;
-    height:40px;
+    width:50%;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     border-radius: 0px;
-    border-color: black;
+    height:40px;
     transition: border-color 0.3s ease;
-    width: 50%;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
 }
-  
-  .variable input:focus {
-    border-color: #007bff;
-  }
-  
   .btn {
     margin-left: 10px;
     padding: 5px 10px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 
   .btn:active {
     transform: scale(0.95);
   }
   
-  .btn:focus{
-    outline: none;
-  }
-  
   .btn + .btn {
     margin-left: 5px;
+  }
+  
+  .btn svg {
+    margin-right: 5px;
+  }
+  
+  .error {
+    color: #c62828;
+    margin-top: 5px;
+    margin-left: 10px;
   }
   
   .icon-trash{
@@ -55,5 +61,9 @@
   .btn-generate{
     font-size: 13px !important;
     color:#7e57c2 !important;
+  }
+
+  .Environment p{
     
+    color: #78909c;
   }
