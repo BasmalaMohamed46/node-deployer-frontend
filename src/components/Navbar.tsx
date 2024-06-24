@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 import "../styles/navbar.css";
 
 const NavBar = () => {
@@ -9,55 +8,74 @@ const NavBar = () => {
       className="header d-flex align-items-center sticky-top my-0 shadow-sm"
     >
       <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
-        <Link
-          to="index.html"
+        <NavLink
+          to="/"
           className="logo d-flex align-items-center me-auto me-xl-0 nav-link"
         >
           <h1 className="sitename">Render </h1>
           <span>Clone</span>
-        </Link>
+        </NavLink>
 
         <nav id="navmenu" className="navmenu">
-          <ul>
+          <ul className="d-flex">
             <li>
-              <Link to="#hero" className="active nav-link">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-link"
+              >
                 Home
-                <br />
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="#featured-services" className=" nav-link">
+              <NavLink
+                to="/services"
+                activeClassName="active"
+                className="nav-link"
+              >
                 Services
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="#about" className=" nav-link">
+              <NavLink
+                to="/about"
+                activeClassName="active"
+                className="nav-link"
+              >
                 About
-              </Link>
+              </NavLink>
             </li>
-
             <li>
-              <Link to="#pricing" className=" nav-link">
+              <NavLink
+                to="/pricing"
+                activeClassName="active"
+                className="nav-link"
+              >
                 Pricing
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="#team" className=" nav-link">
+              <NavLink to="/team" activeClassName="active" className="nav-link">
                 Team
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="#contact" className="nav-link">
+              <NavLink
+                to="/contact"
+                activeClassName="active"
+                className="nav-link"
+              >
                 Contact
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <Link className="btn-getstarted nav-link" to="index.html#about">
+        <NavLink className="btn-getstarted nav-link" to="/about">
           Get Started
-        </Link>
+        </NavLink>
       </div>
     </header>
   );
