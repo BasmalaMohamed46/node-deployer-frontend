@@ -1,7 +1,8 @@
-import { Tier } from "./tier.interface";
-import { DockerImage } from "./dockerImage.interface";
+// src/components/interfaces/container.interface.ts
 
-export interface Container {
+import { Tier } from "./tier.interface";
+
+export interface DockerContainer {
   id: string;
   dockerImageId: string;
   port: string;
@@ -11,5 +12,4 @@ export interface Container {
   createdAt: string;
   updatedAt: string;
   tier: Tier;
-  dockerImage: DockerImage;
 }
