@@ -1,11 +1,11 @@
 // src/components/interfaces/dockerImage.interface.ts
 
-import { Container } from "./container.interface";
+import { DockerContainer } from "./container.interface";
 
 export interface DockerImage {
   id: string;
   repoId: string;
-  Containers: Container[];
+  Containers: DockerContainer[];
   createdAt: string;
   updatedAt: string;
 }

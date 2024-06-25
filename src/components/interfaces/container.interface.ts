@@ -2,7 +2,7 @@
 
 import { Tier } from "./tier.interface";
 
-export interface Container {
+export interface DockerContainer {
   id: string;
   dockerImageId: string;
   port: string;
