@@ -15,7 +15,7 @@ function App() {
         <Route path="/signup" element={<Login />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/env/:repoId" element={<Environment repoId={''} />} />
+        <Route path="/env/:repoId" element={<Environment />} />
         <Route path="/analytics/:containerId" element={<AnalyticsPage />} />
       </Routes>
     </Router>
