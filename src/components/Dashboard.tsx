@@ -1,7 +1,7 @@
 import RepoList from "./RepoList";
 import SideBar from "./SideBar";
 import "../styles/dashboard.css";
-import { DashboardResponse } from "../types/DashboardResponse";
+import { DashboardResponse } from "../types/dashboardResponse";
 import { useState, useEffect } from "react";
 import axios from "axios";
 

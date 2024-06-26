@@ -8,7 +8,9 @@ interface AnalyticsData {
 
 const getAnalyticsData = async (containerId: string, interval: string): Promise<AnalyticsData[]> => {
   try {
-    const response = await axios.get(`http://localhost:3000/analytics/usage`, {
+
+    const baseUrl = import.meta.env.VITE_BACK_END_URL;
+    const response = await axios.get(`${baseUrl}/analytics/usage`, {
       params: {
         containerId,
         interval,

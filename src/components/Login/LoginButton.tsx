@@ -9,7 +9,6 @@ export default function LoginButton({ icon, text, provider }: LoginButtonType) {
 	async function handleBtnClick() {
 		const backendUrl = import.meta.env.VITE_BACK_END_URL;
 		const { url } = (await axios.get(`${backendUrl}/auth/redirectUrl/${provider}`)).data;
-		console.log('URL', url, 'Back-End URL', backendUrl, 'Provider', provider);
 
 		window.location.href = url;
 	}
