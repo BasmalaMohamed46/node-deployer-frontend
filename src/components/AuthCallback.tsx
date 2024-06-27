@@ -3,11 +3,11 @@ import { useEffect } from "react";
 const AuthCallback = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const jwtToken = params.get("jwt");
+    const accessToken = params.get("accessToken");
     const provider = params.get("provider");
 
-    if (jwtToken && provider) {
-      localStorage.setItem("accessToken", jwtToken);
+    if (accessToken && provider) {
+      localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("provider", provider);
 
       window.location.href = "/dashboard";

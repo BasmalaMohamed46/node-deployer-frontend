@@ -16,10 +16,10 @@ export default function Login() {
 	const [redirect, setRedirect] = useState<boolean>(false);
 
 	useEffect(() => {
-		const jwtToken: string | null = localStorage.getItem('jwt');
+		const accessToken: string | null = localStorage.getItem('accessToken');
 		const provider: string | null = localStorage.getItem('provider');
 
-		if (jwtToken && provider) {
+		if (accessToken && provider) {
       setRedirect(true);
 		}
 	}, []);

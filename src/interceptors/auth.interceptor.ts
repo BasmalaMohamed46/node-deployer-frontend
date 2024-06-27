@@ -9,9 +9,9 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (request) => {
-    const jwtToken = localStorage.getItem("jwt");
-    if (jwtToken) {
-      request.headers["Authorization"] = `Bearer ${jwtToken}`;
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      request.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return request;
   },
