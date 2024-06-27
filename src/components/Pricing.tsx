@@ -1,4 +1,5 @@
 import "../styles/pricing.css";
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
   return (
@@ -48,9 +49,9 @@ const Pricing = () => {
               </ul>
 
               <div className="text-center mt-auto">
-                <a href="#" className="buy-btn">
+                <Link to="#" className="buy-btn ">
                   Buy Now
-                </a>
+                </Link>
               </div>
             </div>
           </div>
