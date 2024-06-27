@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getRepos } from "../../services/ReposService";
 import { formatDistanceToNow } from "date-fns";
-import { Repo } from "../interfaces/repo.interface";
+import { Repo } from "../../interfaces/repo.interface";
 import { Link } from "react-router-dom";
 
 export default function Containers() {

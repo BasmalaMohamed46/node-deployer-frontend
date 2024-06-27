@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Dropdown, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Repo } from "../interfaces/repo.interface";
-import { DockerContainer } from "../interfaces/container.interface";
+import { Repo } from "../../interfaces/repo.interface";
+import { DockerContainer } from "../../interfaces/container.interface";
 import { getRepos } from "../../services/ReposService";
 import {
   stopContainer,

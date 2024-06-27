@@ -1,5 +1,5 @@
 import RepoItem from "./RepoItem";
-import { DashboardResponse } from "../types/DashboardResponse";
+import { DashboardResponse } from "../types/dashboardResponse";
 import "../styles/repoList.css";
 
 interface RepoListProps {

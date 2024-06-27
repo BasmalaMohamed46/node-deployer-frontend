@@ -1,5 +1,5 @@
 import "../styles/sideBar.css";
-import { DashboardResponse } from "../types/DashboardResponse";
+import { DashboardResponse } from "../types/dashboardResponse";
 
 interface SideBarProps {
   data: DashboardResponse;

@@ -1,7 +1,9 @@
+
 import { Repo } from "../components/interfaces/repo.interface";
 import { axiosInstance } from "../interceptors/auth.interceptor";
 
-const baseUrl = "http://localhost:3000";
+// WARN: add the VITE_BACK_END_URL = 'localhost:3000' in the .env file
+const baseUrl = import.meta.env.VITE_BACK_END_URL;
 
 export const getRepos = async (): Promise<Repo[]> => {
   try {
