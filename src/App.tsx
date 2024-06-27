@@ -23,7 +23,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/env/:repoId" element={<Environment />} />
         <Route path="/analytics/:containerId" element={<AnalyticsPage />} />
-        <Route path="/logs/:containerId" component={DockerLogs} />
+        <Route path="/logs/:containerId" element={<DockerLogs />} />
       </Routes>
 
     </Router>

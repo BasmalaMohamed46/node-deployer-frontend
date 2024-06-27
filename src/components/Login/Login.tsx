@@ -5,13 +5,15 @@ import Logo from '../Logo/Logo';
 import LoginButton from './LoginButton';
 import LoginButtonType from '../../types/LoginButtonType';
 import { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 	const btns: LoginButtonType[] = [
 		{ icon: faGitlab, text: 'Gitlab', provider: 'gitlab' },
 		{ icon: faGithub, text: 'Github', provider: 'github' },
 	];
+
+  const navigate = useNavigate();
 
 	const [redirect, setRedirect] = useState<boolean>(false);
 
@@ -26,7 +28,7 @@ export default function Login() {
 
 
   if (redirect) {
-    return <Redirect to="/dashboard" />;
+    navigate('/dashboard');
   }
 	return (
 		<div className={styles.container}>

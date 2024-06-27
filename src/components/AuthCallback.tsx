@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthCallback = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const accessToken = params.get("accessToken");
@@ -10,7 +12,7 @@ const AuthCallback = () => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("provider", provider);
 
-      window.location.href = "/dashboard";
+      navigate('/dashboard')
     } else {
       console.error("No access token and provider found in URL");
     }
