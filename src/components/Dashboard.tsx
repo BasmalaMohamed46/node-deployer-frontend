@@ -8,19 +8,19 @@ import axios from "axios";
 function Dashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const accessToken = localStorage.getItem("accessToken");
+  const jwtToken = localStorage.getItem("jwt");
   const provider = localStorage.getItem("provider");
 
   useEffect(() => {
     const fetchRepos = async () => {
-      if (!accessToken) return;
+      if (!jwtToken) return;
 
       try {
         const response = await axios.get<DashboardResponse>(
           `http://localhost:3000/dashboard/${provider}`,
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${jwtToken}`,
             },
           }
         );
@@ -31,7 +31,7 @@ function Dashboard() {
     };
 
     fetchRepos();
-  }, [accessToken, provider]);
+  }, [jwtToken, provider]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
