@@ -13,6 +13,7 @@ import {
 import NavBar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
+import { da } from "date-fns/locale";
 
 export default function RechargePage() {
   const [redirectToCheckout, setRedirectToCheckout] = useState(false);
@@ -25,7 +26,7 @@ export default function RechargePage() {
       const response = await axios.post(
         "http://localhost:3000/payment/stripe",
         {
-          price: price,
+          price: Number(price),
           description: "Balance Recharge",
           user_id: "108169772",
           urlSuccess: "http://localhost:3000/payment/success",
@@ -35,6 +36,7 @@ export default function RechargePage() {
       );
 
       const data = response.data;
+      console.log(data);
       if (data.url) {
         setCheckoutUrl(data.url);
         setRedirectToCheckout(true);
