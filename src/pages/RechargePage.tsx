@@ -13,7 +13,6 @@ import {
 import NavBar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
-import { da } from "date-fns/locale";
 
 export default function RechargePage() {
   const [redirectToCheckout, setRedirectToCheckout] = useState(false);
