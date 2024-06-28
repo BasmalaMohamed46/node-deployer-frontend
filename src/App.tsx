@@ -11,6 +11,7 @@ import "./App.css";
 import Environment from "./components/Environment/Environment.tsx";
 import Containers from "./components/Containers/Containers.tsx";
 import OneContainer from "./components/One Container/OneContainer.tsx";
+import ContainerWrapper from "./components/ContainerDashboard/ContainerWrapper.tsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/analytics/:containerId" element={<AnalyticsPage />} />
         <Route path="/containers/" element={<Containers />} />
         <Route path="/containers/:id" element={<OneContainer />} />
+        <Route path="/containers/:id/container/*" element={<ContainerWrapper />} />
         <Route path="/logs/:containerId" element={<DockerLogs />} />
         <Route path="/settings/:containerId" element={<Settings />} />
       </Routes>
