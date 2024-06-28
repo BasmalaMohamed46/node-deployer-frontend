@@ -12,18 +12,18 @@ export default function ContainerDashboardSidebar() {
 	// TODO: edit the sidebarContent
 	const [sidebarContent, setSidebarContent] = useState<ContainerDashboardSidebarItemType[]>([
 		{
-			routeLink: 'events',
-			text: 'Events',
+			routeLink: 'login',
+			text: 'Container',
 			isActive: true,
 		},
 		{
-			routeLink: 'login',
-			text: 'Events',
+			routeLink: 'logo',
+			text: 'Logs',
 			isActive: false,
 		},
 		{
 			routeLink: '/events',
-			text: 'Events',
+			text: 'Environment',
 			isActive: false,
 		},
 		{
