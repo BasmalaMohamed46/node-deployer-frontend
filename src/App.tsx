@@ -9,10 +9,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={RechargePage} />
-        <Route path="/product" component={LandingPage} />
-        <Route path="/pricing" component={LandingPage} />
-        <Route path="/about" component={LandingPage} />
+        <Route path="/" component={LandingPage} />
         <Route path="/recharge" component={RechargePage} />
         <Route path="/auth/callback" component={AuthCallback} />
         <Route path="/dashboard" component={Dashboard} />

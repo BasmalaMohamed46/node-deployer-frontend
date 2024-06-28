@@ -1,7 +1,20 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/navbar.css";
+import ProfileState from "./ProfileState";
 
-const NavBar = () => {
+interface NavProps {
+  heroRef: React.RefObject<HTMLElement>;
+  aboutRef: React.RefObject<HTMLElement>;
+  pricingRef: React.RefObject<HTMLElement>;
+  teamRef: React.RefObject<HTMLElement>;
+  contactRef: React.RefObject<HTMLElement>;
+}
+
+const NavBar:FC<NavProps>= ({ heroRef, aboutRef, pricingRef, teamRef, contactRef }) => {
+  const handleScroll = (ref:React.RefObject<HTMLElement>) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <header
       id="header"
@@ -20,8 +33,9 @@ const NavBar = () => {
           <ul className="d-flex">
             <li>
               <NavLink
+                onClick={() => handleScroll(heroRef)}
                 exact
-                to="/"
+                to="/hero"
                 activeClassName="active"
                 className="nav-link"
               >
@@ -30,7 +44,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to="/services"
+                to="/services" // To the Service Page
                 activeClassName="active"
                 className="nav-link"
               >
@@ -39,6 +53,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
+                onClick={() => handleScroll(aboutRef)}
                 to="/about"
                 activeClassName="active"
                 className="nav-link"
@@ -48,6 +63,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
+                onClick={() => handleScroll(pricingRef)}
                 to="/pricing"
                 activeClassName="active"
                 className="nav-link"
@@ -56,12 +72,15 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/team" activeClassName="active" className="nav-link">
+              <NavLink 
+                onClick={() => handleScroll(teamRef)}
+                to="/team" activeClassName="active" className="nav-link">
                 Team
               </NavLink>
             </li>
             <li>
               <NavLink
+                onClick={() => handleScroll(contactRef)}
                 to="/contact"
                 activeClassName="active"
                 className="nav-link"
@@ -72,10 +91,11 @@ const NavBar = () => {
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
+        <div id="navmenu" className="navmenu me-5 pe-5">
+        <ProfileState />
+        </div>
 
-        <NavLink className="btn-getstarted nav-link" to="/about">
-          Get Started
-        </NavLink>
+
       </div>
     </header>
   );
