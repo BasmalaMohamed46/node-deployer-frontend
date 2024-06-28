@@ -35,3 +35,13 @@ export const restartService = async (repoId: string): Promise<void> => {
     throw error;
   }
 };
+
+export const deleteContainer = async (containerId: string): Promise<void> => {
+  try {
+    await axiosInstance.delete(`deploy/container/${containerId}`);
+  } catch (error) {
+    console.error("Error deleting container:", error);
+    throw error;
+  }
+};
+
