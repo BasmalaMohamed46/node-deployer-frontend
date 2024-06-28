@@ -98,8 +98,7 @@ function Environment() {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
           body: JSON.stringify({
-            webhookUrl:
-              'https://116b-197-197-136-149.ngrok-free.app/dashboard/webhook',
+            webhookUrl: process.env.WEBHOOKURL,
             repoId: repoId,
           }),
         }
