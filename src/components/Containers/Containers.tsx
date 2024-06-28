@@ -3,12 +3,14 @@ import { getRepos } from "../../services/ReposService";
 import { formatDistanceToNow } from "date-fns";
 import { Repo } from "../../interfaces/repo.interface";
 import { Link } from "react-router-dom";
+import { DockerContainer } from "../../interfaces/container.interface";
 
 export default function Containers() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [filteredContainers, setFilteredContainers] = useState<
     Repo["dockerImage"]["Containers"]
   >([]);
+
   const [selectedTab, setSelectedTab] = useState("All");
   const [activeCount, setActiveCount] = useState(0);
   const [suspendedCount, setSuspendedCount] = useState(0);
@@ -20,7 +22,7 @@ export default function Containers() {
         setRepos(data);
 
         const allContainers = data.flatMap(
-          (repo) => repo.dockerImage.Containers
+          (repo) => repo.dockerImage?.Containers || []
         );
 
         setActiveCount(
@@ -39,7 +41,9 @@ export default function Containers() {
   }, []);
 
   useEffect(() => {
-    let allContainers = repos.flatMap((repo) => repo.dockerImage.Containers);
+    let allContainers = repos.flatMap(
+      (repo) => repo.dockerImage?.Containers || []
+    );
     if (selectedTab === "Active") {
       allContainers = allContainers.filter(
         (container) => container.status === "up"
@@ -92,7 +96,6 @@ export default function Containers() {
       <table className="table table-striped mt-3">
         <thead>
           <tr>
-            {/* <th scope="col"></th> */}
             <th className="text-center align-middle" scope="col">
               Container Id
             </th>
@@ -117,15 +120,12 @@ export default function Containers() {
           </tr>
         </thead>
         <tbody>
-          {filteredContainers.map((container) => {
+          {filteredContainers.map((container: DockerContainer) => {
             const repo = repos.find((r) =>
-              r.dockerImage.Containers.some((c) => c.id === container.id)
+              r.dockerImage?.Containers?.some((c) => c.id === container.id)
             );
             return (
               <tr key={container.id}>
-                {/* <td>
-                  <input type="checkbox" />
-                </td> */}
                 <td className="text-center align-middle">
                   <svg
                     fill="currentColor"
