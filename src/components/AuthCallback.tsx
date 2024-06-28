@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 const AuthCallback = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("accessToken");
-    const provider = params.get("provider");
 
+    const searchParams = new URLSearchParams(window.location.search);
+    const accessToken = decodeURIComponent(searchParams.get('access_token') || '');
+    const provider = decodeURIComponent(searchParams.get('provider') || '');
+
+    console.log(accessToken);
+    console.log(provider);
     if (accessToken && provider) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("provider", provider);

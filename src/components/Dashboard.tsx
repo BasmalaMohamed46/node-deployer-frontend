@@ -4,13 +4,18 @@ import "../styles/dashboard.css";
 import { DashboardResponse } from "../types/dashboardResponse";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const accessToken = localStorage.getItem("accessToken");
   const provider = localStorage.getItem("provider");
+  const navigate = useNavigate(); 
+  // console.log("dashboard "+accessToken)
+  // console.log("dashboard "+provider)
 
+  
   useEffect(() => {
     const fetchRepos = async () => {
       if (!accessToken) return;
@@ -20,7 +25,8 @@ function Dashboard() {
           `http://localhost:3000/dashboard/${provider}`,
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             },
           }
         );
@@ -35,6 +41,15 @@ function Dashboard() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+  };
+
+  const handleConnect = async (repoId: string, repoUrl: string, repoName: string) => { 
+    console.log("Connecting to repo with ID:", repoId);
+    try {
+      navigate(`/env/${repoId}?url=${encodeURIComponent(repoUrl)}&name=${encodeURIComponent(repoName)}`);
+    } catch (error) {
+      console.error('Error connecting to repo:', error);
+    }
   };
 
   const filteredData = data
@@ -76,7 +91,9 @@ function Dashboard() {
                 />
                 <i className="fas fa-search search-icon"></i>
               </div>
-              {filteredData && <RepoList data={filteredData} />}
+              {filteredData && (
+                <RepoList data={filteredData} onConnect={handleConnect} />
+              )}
             </div>
           </div>
         </div>

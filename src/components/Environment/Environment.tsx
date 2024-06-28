@@ -89,6 +89,23 @@ function Environment() {
       });
 
       const result = await response.json();
+      const responseWebhook = await fetch(
+        `http://localhost:3000/dashboard/gitlab/webhooks`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          body: JSON.stringify({
+            webhookUrl:
+              'https://116b-197-197-136-149.ngrok-free.app/dashboard/webhook',
+            repoId: repoId,
+          }),
+        }
+      );
+
+      console.log(responseWebhook);
       console.log(result);
     } catch (error) {
       console.error('Save Environment Variable error:', error);
