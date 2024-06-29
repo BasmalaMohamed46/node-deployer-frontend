@@ -25,7 +25,7 @@ const OneContainer: React.FC = () => {
       try {
         const repos = await getRepos();
         const matchedRepo = repos.find((repo) =>
-          repo.dockerImage.Containers.some(
+          repo.dockerImage?.Containers.some(
             (DockerContainer) => DockerContainer.id === id
           )
         );
