@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const AuthCallback = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const accessToken = decodeURIComponent(
@@ -10,13 +12,9 @@ const AuthCallback = () => {
     );
     const provider = decodeURIComponent(searchParams.get("provider") || "");
 
-    console.log(accessToken);
-    console.log(provider);
-    if (accessToken && provider) {
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("provider", provider);
-
-      navigate("/dashboard");
+      if (accessToken && provider) {
+      login(provider, accessToken)
+      navigate("/");
     } 
   }, []);
 
