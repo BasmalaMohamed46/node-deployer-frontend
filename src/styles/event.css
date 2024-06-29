@@ -1,0 +1,48 @@
+.event-wrapper {
+  display: block;
+  justify-content: center;
+  margin: 40px;
+}
+
+.event-img {
+  width: 30px;
+  height: 30px;
+  color: rgb(143 143 143);
+  margin: 15px 15px 15px 10px;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-bottom: none;
+}
+
+.event-wrapper:last-child {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-time {
+  color: rgb(143 143 143);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.commit-url {
+  color: #000000;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  margin: 5px 0;
+}

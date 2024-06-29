@@ -1,19 +1,20 @@
 import RepoList from "./RepoList";
 import SideBar from "./SideBar";
 import "../styles/dashboard.css";
-import { DashboardResponse } from "../types/DashboardResponse";
+import { DashboardResponse } from "../types/dashboardResponse";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Dashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
+  const [reposUrl, setReposUrl] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const accessToken = localStorage.getItem("accessToken");
   const provider = localStorage.getItem("provider");
 
   useEffect(() => {
     const fetchRepos = async () => {
-      if (!accessToken) return;
+      if (!accessToken || !provider) return;
 
       try {
         const response = await axios.get<DashboardResponse>(
@@ -32,6 +33,28 @@ function Dashboard() {
 
     fetchRepos();
   }, [accessToken, provider]);
+
+  useEffect(() => {
+    const fetchUserRepos = async () => {
+      if (!accessToken) return;
+
+      try {
+        const response = await axios.get<string[]>(
+          `http://localhost:3000/dashboard/repos/url`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setReposUrl(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchUserRepos();
+  }, [accessToken]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -76,7 +99,9 @@ function Dashboard() {
                 />
                 <i className="fas fa-search search-icon"></i>
               </div>
-              {filteredData && <RepoList data={filteredData} />}
+              {filteredData && (
+                <RepoList data={filteredData} reposUrl={reposUrl} />
+              )}
             </div>
           </div>
         </div>

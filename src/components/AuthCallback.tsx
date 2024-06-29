@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const AuthCallback = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("access_token");
+    const accessToken = params.get("accessToken");
     const provider = params.get("provider");
 
     if (accessToken && provider) {
