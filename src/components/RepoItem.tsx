@@ -4,15 +4,20 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 
 interface RepoItemProps {
   repo: Repo;
-  onConnect: (repoId: string, repoUrl: string, repoName: string) => void;
+  reposUrl: string[];
 }
 
-const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect }) => {
+
+
+const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
   const provider = localStorage.getItem('provider');
 
   const updatedTime = parseISO(repo.updated_at);
+  const provider = localStorage.getItem("provider");
   const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
-
+  const isRepoConnected = reposUrl.includes(
+    repo.http_url_to_repo.replace(".git", "")
+  );
   const imageUrl = provider ? `/images/${provider.toLowerCase()}.png` : '';
   let repoUrl: string;
   let repoName: string;
@@ -50,17 +55,23 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect }) => {
         <span className="separator"></span>
         <span className="repo-time">{timeDifference}</span>
       </div>
-      <button
-        className="connect-button"
-        onClick={() =>
+      {isRepoConnected ? (
+        <button className="connected-button" disabled>
+          Connected
+        </button>
+      ) : (
+        <button 
+          className="connect-button"
+          onClick={() =>
           onConnect(
             repoId.toString(),
             repoUrl,
             repoName
           )
         }>
-        Connect
-      </button>
+            Connect
+         </button>
+      )}
     </div>
   );
 };

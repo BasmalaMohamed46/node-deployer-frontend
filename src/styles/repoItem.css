@@ -56,10 +56,23 @@
   line-height: 18px;
   letter-spacing: 0.13px;
   cursor: pointer;
+  margin-right: 1.1%;
 }
 
 .connect-button:hover {
   background-color: rgb(138 5 255);
+}
+
+.connected-button {
+  background-color: rgb(138 5 255);
+  color: white;
+  border: none;
+  padding: 0.375rem 0.5rem;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.13px;
+  cursor: pointer;
 }
 
 @media (max-width: 450px) {
@@ -72,7 +85,8 @@
     display: none;
   }
 
-  .connect-button {
+  .connect-button,
+  .connected-button {
     margin-top: 10px;
   }
 }

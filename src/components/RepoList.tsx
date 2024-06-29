@@ -5,10 +5,10 @@ import "../styles/repoList.css";
 
 interface RepoListProps {
   data: DashboardResponse;
-  onConnect: (repoId: string, repoUrl: string, repoName: string) => void; 
+  reposUrl: string[];
 }
 
-const RepoList: React.FC<RepoListProps> = ({ data, onConnect }) => {
+const RepoList: React.FC<RepoListProps> = ({ data, onConnect, reposUrl }) => {
   return (
     <div className="repo-list-container">
       <div className="repo-list">
@@ -16,6 +16,7 @@ const RepoList: React.FC<RepoListProps> = ({ data, onConnect }) => {
           <RepoItem
             key={repo.id}
             repo={repo}
+            reposUrl={reposUrl}
             onConnect={(repoId, repoUrl, repoName) => onConnect(repoId, repoUrl, repoName)} 
           />
         ))}

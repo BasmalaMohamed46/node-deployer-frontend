@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
+  const [reposUrl, setReposUrl] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const accessToken = localStorage.getItem('accessToken');
   const provider = localStorage.getItem('provider');
@@ -40,11 +41,35 @@ function Dashboard() {
     fetchRepos();
   }, [accessToken, provider]);
 
+
+  useEffect(() => {
+    const fetchUserRepos = async () => {
+      if (!accessToken) return;
+
+      try {
+        const response = await axios.get<string[]>(
+          `http://localhost:3000/dashboard/repos/url`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setReposUrl(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchUserRepos();
+  }, [accessToken]);
+
   if (redirect) {
     navigate('/login');
   }
 
   console.log(data);
+
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -100,7 +125,9 @@ function Dashboard() {
                 />
                 <i className="fas fa-search search-icon"></i>
               </div>
-              {filteredData && <RepoList data={filteredData} onConnect={handleConnect} />}
+
+              {filteredData && <RepoList data={filteredData} onConnect={handleConnect} reposUrl={reposUrl} />}
+
             </div>
           </div>
         </div>
