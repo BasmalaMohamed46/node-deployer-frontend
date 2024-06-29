@@ -41,6 +41,9 @@ export default function Login() {
 					})}
 				</div>
 			</div>
+      <div className={styles.ill}>
+        <img src="/images/login-illustration.svg" alt="" />
+      </div>
 		</div>
 	);
 }
