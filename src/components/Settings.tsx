@@ -3,19 +3,20 @@ import { useParams } from 'react-router-dom';
 import { deleteContainer } from '../services/ContainerService';
 
 const Settings: React.FC = () => {
-    const { containerId } = useParams<{ containerId: string }>();
+    const { id } = useParams<{ id: string }>();
+    console.log(id);
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
     const [alertType, setAlertType] = useState<'success' | 'danger' | null>(null);
 
     const handleDelete = async () => {
-        if (!containerId) {
+        if (!id) {
             setAlertMessage('Container ID not found');
             setAlertType('danger');
             return;
         }
 
         try {
-            await deleteContainer(containerId);
+            await deleteContainer(id);
             setAlertMessage('Container deleted successfully');
             setAlertType('success');
         } catch (error) {
