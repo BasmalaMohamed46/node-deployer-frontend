@@ -1,0 +1,26 @@
+
+.logs-container {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  .log-entry.info {
+    background-color: #007bff;
+  }
+  
+  .log-entry.error {
+    background-color: #dc3545;
+  }
+  
+  .log-entry.warning {
+    background-color: #ffc107;
+  }
+  
+  .log-entry .log-timestamp {
+    font-weight: bold;
+  }
+  
+  .log-entry .log-message {
+    margin-left: 10px;
+  }
+  

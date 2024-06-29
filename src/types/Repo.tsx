@@ -9,4 +9,5 @@ export interface Repo {
     path: string;
   };
   path: string;
+  clone_url: string;
 }
