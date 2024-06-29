@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export type AuthContextType = {
   isLoggedIn: boolean;
@@ -23,6 +23,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('accessToken', accesssToken);
     setIsLoggedIn(true);
   };
+
+  useEffect(() => {
+   const provider = localStorage.getItem('provider');
+    const accessToken = localStorage.getItem('accessToken');
+    if (provider && accessToken) {
+      setIsLoggedIn(true)
+    }
+  }, [])
   const logout = () => {
     localStorage.removeItem('provider');
     localStorage.removeItem('accessToken');
