@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/navbar.css';
 import ProfileState from './ProfileState';
 
-const NavBar: FC = () => {
+const NavBar = () => {
   return (
     <header id="header" className="header d-flex align-items-center sticky-top my-0 shadow-sm">
       <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
