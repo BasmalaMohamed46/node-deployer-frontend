@@ -72,7 +72,6 @@ function Environment() {
     const url = decodeURIComponent(searchParams.get("url") || "");
     const name = decodeURIComponent(searchParams.get("name") || "");
 
-    console.log("asfasfasf");
     try {
       const response = await fetch("http://localhost:3000/environment", {
         method: "POST",
@@ -89,9 +88,10 @@ function Environment() {
         }),
       });
       const webhookUrl = import.meta.env.WEBHOOKURL;
+      const provider = localStorage.getItem('provider');
       const result = await response.json();
       const responseWebhook = await fetch(
-        `http://localhost:3000/dashboard/gitlab/webhooks`,
+        `http://localhost:3000/dashboard/${provider}/webhooks`,
         {
           method: "POST",
           headers: {

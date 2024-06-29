@@ -17,9 +17,7 @@ const AuthCallback = () => {
       localStorage.setItem("provider", provider);
 
       navigate("/dashboard");
-    } else {
-      console.error("No access token and provider found in URL");
-    }
+    } 
   }, []);
 
   return <div>Loading...</div>;
