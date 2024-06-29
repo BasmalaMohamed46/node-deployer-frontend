@@ -1,4 +1,3 @@
-// Commit.tsx
 import "../styles/event.css";
 import type { CommitType } from "../types/commit";
 

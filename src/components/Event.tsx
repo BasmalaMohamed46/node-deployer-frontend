@@ -1,4 +1,3 @@
-// Event.tsx
 import { useState, useEffect } from "react";
 import "../styles/event.css";
 import { EventResponse } from "../types/eventResponse";
