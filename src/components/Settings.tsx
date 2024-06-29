@@ -26,6 +26,11 @@ const Settings: React.FC = () => {
 
     return (
         <div className="container mt-4">
+            {alertMessage && (
+                <div className={`alert mt-3 alert-${alertType}`} role="alert">
+                    {alertMessage}
+                </div>
+            )}
             <div className="card">
                 <div className="card-body d-flex flex-column justify-content-center" style={{ height: '200px' }}>
                     <h2 className="card-title">Settings</h2>
@@ -39,11 +44,6 @@ const Settings: React.FC = () => {
                             Delete Container
                         </button>
                     </div>
-                    {alertMessage && (
-                        <div className={`alert mt-3 alert-${alertType}`} role="alert">
-                            {alertMessage}
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
