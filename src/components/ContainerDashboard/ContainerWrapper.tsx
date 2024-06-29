@@ -3,6 +3,10 @@ import ContainerDashboardSidebar from './ContainerDashboardSidebar';
 import Logo from '../Logo/Logo';
 import Containers from '../Containers/Containers';
 import { ReactNode } from 'react';
+import DockerLogs from '../DockerLogs';
+import Environment from '../Environment/Environment';
+import AnalyticsPage from '../AnalyticsPage';
+import Settings from '../Settings';
 
 export default function ContainerWrapper() {
 
@@ -19,8 +23,20 @@ export default function ContainerWrapper() {
       element: <Containers />
     },
     {
-      path: "logo",
-      element: <Logo />
+      path: "logs",
+      element: <DockerLogs />
+    },
+    {
+      path: "environment",
+      element: <Environment />
+    },
+    {
+      path: "analytics",
+      element: <AnalyticsPage />
+    },
+    {
+      path: "settings",
+      element: <Settings />
     }
   ]
   return (

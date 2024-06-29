@@ -17,35 +17,25 @@ export default function ContainerDashboardSidebar() {
 			isActive: true,
 		},
 		{
-			routeLink: 'logo',
+			routeLink: 'logs',
 			text: 'Logs',
 			isActive: false,
-		},
-		{
-			routeLink: '/events',
+		  },
+		  {
+			routeLink: 'environment',
 			text: 'Environment',
 			isActive: false,
-		},
-		{
-			routeLink: '/events',
-			text: 'Events',
+		  },
+		  {
+			routeLink: 'analytics',
+			text: 'Analytics',
 			isActive: false,
-		},
-		{
-			routeLink: '/events',
-			text: 'Events',
+		  },
+		  {
+			routeLink: 'settings',
+			text: 'Settings',
 			isActive: false,
-		},
-		{
-			routeLink: '/events',
-			text: 'Events',
-			isActive: false,
-		},
-		{
-			routeLink: '/events',
-			text: 'Events',
-			isActive: false,
-		},
+		  },
 	]);
 
 	function handleActive(index: number): void {
