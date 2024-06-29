@@ -61,14 +61,16 @@ function Dashboard() {
     }
   };
 
+
   const filteredData = data
     ? {
         ...data,
         repos: data.repos.filter(
-          (repo) =>
-            repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            repo.namespace.path.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            repo.path.toLowerCase().includes(searchQuery.toLowerCase()),
+          (repo) => {
+            return ( repo.name && repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ) ||
+            ( repo.namespace && repo.namespace.path && repo.namespace.path.toLowerCase().includes(searchQuery.toLowerCase()) ) ||
+            ( repo.path && repo.path.toLowerCase().includes(searchQuery.toLowerCase()) )
+          }
         ),
       }
     : null;
