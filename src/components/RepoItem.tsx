@@ -10,15 +10,7 @@ interface RepoItemProps {
 
 
 const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
-  const provider = localStorage.getItem('provider');
-
-  const updatedTime = parseISO(repo.updated_at);
   const provider = localStorage.getItem("provider");
-  const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
-  const isRepoConnected = reposUrl.includes(
-    repo.http_url_to_repo.replace(".git", "")
-  );
-  const imageUrl = provider ? `/images/${provider.toLowerCase()}.png` : '';
   let repoUrl: string;
   let repoName: string;
   let repoId: string | number;
@@ -33,6 +25,15 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
     repoName = repo.path_with_namespace;
     repoId = repo.id;
   }
+
+
+  const updatedTime = parseISO(repo.updated_at);
+  const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
+  const isRepoConnected = reposUrl.includes(
+    repoUrl
+  );
+  
+  const imageUrl = provider ? `/images/${provider.toLowerCase()}.png` : '';
 
   return (
     <div className="repo-item">
