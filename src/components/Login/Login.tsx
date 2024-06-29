@@ -32,7 +32,6 @@ export default function Login() {
   }
 	return (
 		<div className={styles.container}>
-			<Logo className={styles.logo} />
 			<div className={styles.loginContainer}>
 				<h2>Sign In</h2>
 				<div className={styles.btnContainer}>

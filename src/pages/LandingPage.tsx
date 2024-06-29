@@ -25,14 +25,14 @@ const LandingPage = () => {
 
   return (
     <>
-      <NavBar 
-        heroRef={heroRef}
-        servicesRef={servicesRef}
-        aboutRef={aboutRef}
-        pricingRef={pricingRef}
-        teamRef={teamRef}
-        contactRef={contactRef}
-      />
+      {/* <NavBar  */}
+      {/*   heroRef={heroRef} */}
+      {/*   servicesRef={servicesRef} */}
+      {/*   aboutRef={aboutRef} */}
+      {/*   pricingRef={pricingRef} */}
+      {/*   teamRef={teamRef} */}
+      {/*   contactRef={contactRef} */}
+      {/* /> */}
       <section ref={heroRef}><Hero /></section>
       <section ref={aboutRef}><About /></section>
       <section ref={pricingRef}><Pricing /></section>

@@ -16,7 +16,7 @@ const AuthCallback = () => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("provider", provider);
 
-      navigate("/dashboard");
+      navigate("/");
     } 
   }, []);
 

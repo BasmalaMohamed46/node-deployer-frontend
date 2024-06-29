@@ -1,10 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ProfileState = () => {
     const userName = "Jhon Doe";
     const balance = 15;
-    const loggedIn = false;
+    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const provider = localStorage.getItem("provider");
+    const accessToken = localStorage.getItem("accessToken");
+
+
+  useEffect(() => {
+    if (provider && accessToken) {
+      setLoggedIn(true);
+    }
+  }
+  , [provider, accessToken]);
+
   return (
     <>
         {
@@ -20,9 +31,9 @@ const ProfileState = () => {
             </ul>
           </div>
         ) : (
-                <NavLink className="btn-getstarted nav-link" to="/about">
-                    Get Started
-                </NavLink>
+          <Link className="btn-getstarted nav-link" to="/login">
+            Login
+          </Link>
         )
     }
     </>
