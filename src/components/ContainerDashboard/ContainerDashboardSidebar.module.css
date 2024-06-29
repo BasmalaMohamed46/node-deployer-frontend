@@ -4,9 +4,7 @@
 	list-style-type: none;
 	padding: 0;
 	max-width: 200px;
-	/* TODO: remove this after finishing development */
-	margin: 2rem;
-	/* --------  */
+
 
 	& > a {
 		text-decoration: none;

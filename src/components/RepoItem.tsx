@@ -1,4 +1,3 @@
-import React from 'react';
 import { Repo } from '../types/Repo';
 import '../styles/repoItem.css';
 import { formatDistanceToNow, parseISO } from 'date-fns';
@@ -15,6 +14,20 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect }) => {
   const timeDifference = formatDistanceToNow(updatedTime, { addSuffix: true });
 
   const imageUrl = provider ? `/images/${provider.toLowerCase()}.png` : '';
+  let repoUrl: string;
+  let repoName: string;
+  let repoId: string | number;
+
+
+  if (provider === 'github') {
+    repoUrl = repo.clone_url;
+    repoName = repo.name;
+    repoId = repo.name;
+  } else if (provider === 'gitlab') {
+    repoUrl = repo.http_url_to_repo;
+    repoName = repo.path_with_namespace;
+    repoId = repo.id;
+  }
 
   return (
     <div className="repo-item">
@@ -27,12 +40,12 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect }) => {
           />
         )}
         <a
-          href={repo.http_url_to_repo}
+          href={repoUrl}
           className="repo-link"
-          title={repo.http_url_to_repo}
+          title={repoUrl}
           target="_blank"
           rel="noopener noreferrer">
-          <span className="repo-name">{repo.path_with_namespace}</span>
+          <span className="repo-name">{repoName}</span>
         </a>
         <span className="separator"></span>
         <span className="repo-time">{timeDifference}</span>
@@ -41,9 +54,9 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect }) => {
         className="connect-button"
         onClick={() =>
           onConnect(
-            repo.id.toString(),
-            repo.http_url_to_repo,
-            repo.path_with_namespace
+            repoId.toString(),
+            repoUrl,
+            repoName
           )
         }>
         Connect

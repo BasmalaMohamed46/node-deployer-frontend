@@ -9,6 +9,7 @@ import {
   resumeContainer,
   redeploy,
 } from "../../services/ContainerService";
+import ContainerWrapper from "../ContainerDashboard/ContainerWrapper";
 
 const OneContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -176,6 +177,10 @@ const OneContainer: React.FC = () => {
         </Row>
       </Container>
       <hr />
+
+      <Container className="mt-4">
+        <ContainerWrapper />
+      </Container>
     </>
   );
 };
