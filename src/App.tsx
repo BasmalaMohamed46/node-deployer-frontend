@@ -19,9 +19,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/recharge" element={RechargePage} />
-        <Route path="/auth/callback" component={AuthCallback} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/recharge" element={<RechargePage />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Login />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
