@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/environment.css";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from 'react-router-dom';
 import {
   faPlus,
   faTrash,
@@ -27,6 +28,7 @@ function Environment() {
   const [selectedNodeVersion, setSelectedNodeVersion] = useState<string>(nodeVersions[0]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const generateRandomValue = (index: number) => {
     const newVariables = [...variables];
@@ -115,7 +117,8 @@ function Environment() {
       );
 
       console.log(responseWebhook);
-      console.log(result);
+      console.log(result.id);
+      navigate(`/pricing/${result.id}`)
     } catch (error) {
       console.error("Save Environment Variable error:", error);
     } finally {

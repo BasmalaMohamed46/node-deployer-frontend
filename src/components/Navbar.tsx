@@ -7,8 +7,7 @@ const NavBar = () => {
     <header id="header" className="header d-flex align-items-center sticky-top my-0 shadow-sm">
       <div className="container-fluid position-relative d-flex align-items-center justify-content-between">
         <NavLink to="/" className="logo d-flex align-items-center me-auto me-xl-0 nav-link">
-          <h1 className="sitename">Render </h1>
-          <span>Clone</span>
+          <img src="/images/logo.jpg" alt="weBuild Logo"/>
         </NavLink>
 
         <nav id="navmenu" className="navmenu">
