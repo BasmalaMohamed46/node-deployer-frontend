@@ -7,6 +7,7 @@ import DockerLogs from '../DockerLogs';
 import Environment from '../Environment/Environment';
 import AnalyticsPage from '../AnalyticsPage';
 import Settings from '../Settings';
+import NotFound from '../NotFound';
 
 export default function ContainerWrapper() {
 
@@ -37,6 +38,10 @@ export default function ContainerWrapper() {
     {
       path: "settings",
       element: <Settings />
+    },
+    {
+      path: "*",
+      element: <NotFound />
     }
   ]
   return (

@@ -17,10 +17,14 @@
 		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@types/axios": "^0.14.0",
 		"@types/react-router-dom": "^5.3.3",
+		"aos": "^2.3.4",
 		"axios": "^1.7.2",
 		"bootstrap": "^5.3.3",
+		"bootstrap-icons": "^1.11.3",
 		"date-fns": "^3.6.0",
 		"dotenv": "^16.4.5",
+		"jwt-decode": "^4.0.0",
+		"mdb-react-ui-kit": "^8.0.0",
 		"react": "^18.3.1",
 		"react-bootstrap": "^2.10.3",
 		"react-dom": "^18.3.1",
@@ -30,6 +34,7 @@
 		"uuid": "^10.0.0"
 	},
 	"devDependencies": {
+		"@types/aos": "^3.0.7",
 		"@types/node": "^20.14.9",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",

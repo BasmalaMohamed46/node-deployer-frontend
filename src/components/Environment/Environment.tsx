@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/environment.css";
 import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from 'react-router-dom';
 import {
   faPlus,
   faTrash,
@@ -12,13 +13,22 @@ import {
 import { EnvVariables } from "../../types/EnvVariables";
 import { useParams } from "react-router-dom";
 
+const nodeVersions = [
+  "20.14.0",
+  "20.14.1",
+  "20.14.2",
+  "20.14.3",
+];
+
 function Environment() {
   const { repoId } = useParams<{ repoId: string }>();
   const [variables, setVariables] = useState<EnvVariables[]>([
     { name: "NAME_OF_VARIABLE", value: "", visible: false },
   ]);
+  const [selectedNodeVersion, setSelectedNodeVersion] = useState<string>(nodeVersions[0]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const generateRandomValue = (index: number) => {
     const newVariables = [...variables];
@@ -84,6 +94,7 @@ function Environment() {
           name,
           url,
           variables: variables.map(({ name, value }) => ({ name, value })),
+          nodeVersion: selectedNodeVersion,
           event: "push",
         }),
       });
@@ -106,7 +117,8 @@ function Environment() {
       );
 
       console.log(responseWebhook);
-      console.log(result);
+      console.log(result.id);
+      navigate(`/pricing/${result.id}`)
     } catch (error) {
       console.error("Save Environment Variable error:", error);
     } finally {
@@ -122,6 +134,19 @@ function Environment() {
         application. <br /> They are used to store sensitive data like API keys,
         database passwords, etc.
       </p>
+      <div className="node-version-selector">
+        <label htmlFor="node-version" className="form-label">Select Node Version:</label>
+        <select
+          id="node-version"
+          value={selectedNodeVersion}
+          onChange={(e) => setSelectedNodeVersion(e.target.value)}
+          className="form-select"
+        >
+          {nodeVersions.map((version) => (
+            <option key={version} value={version}>{version}</option>
+          ))}
+        </select>
+      </div>
       {variables.map((variable, index) => (
         <div key={index} className="variable-wrapper">
           <div className="variable">
