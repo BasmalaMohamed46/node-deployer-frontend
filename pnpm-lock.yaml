@@ -75,6 +75,9 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
     devDependencies:
+      '@types/aos':
+        specifier: ^3.0.7
+        version: 3.0.7
       '@types/node':
         specifier: ^20.14.9
         version: 20.14.9
@@ -562,6 +565,9 @@ packages:
 
   '@swc/helpers@0.5.11':
     resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
+
+  '@types/aos@3.0.7':
+    resolution: {integrity: sha512-sEhyFqvKauUJZDbvAB3Pggynrq6g+2PS4XB3tmUr+mDL1gfDJnwslUC4QQ7/l8UD+LWpr3RxZVR/rHoZrLqZVg==}
 
   '@types/axios@0.14.0':
     resolution: {integrity: sha512-KqQnQbdYE54D7oa/UmYVMZKq7CO4l8DEENzOKc4aBRwxCXSlJXGz83flFx5L7AWrOQnmuN3kVsRdt+GZPPjiVQ==}
@@ -1973,6 +1979,8 @@ snapshots:
   '@swc/helpers@0.5.11':
     dependencies:
       tslib: 2.6.3
+
+  '@types/aos@3.0.7': {}
 
   '@types/axios@0.14.0':
     dependencies:
