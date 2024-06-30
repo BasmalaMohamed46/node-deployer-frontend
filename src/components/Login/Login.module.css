@@ -1,40 +1,90 @@
 .container {
-	position: relative;
-	margin-inline: auto;
-	height: 100vh;
-	padding: 2rem;
-}
-
-.logo {
-	position: absolute;
-	z-index: 100;
-	top: 0;
-	left: 0;
-	padding: 1rem 2rem;
-  margin: 1rem;
-}
-
-.loginContainer {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	translate: 0 -50%;
-	padding: 1rem 2rem;
-}
-
-.btnContainer {
-	margin-top: 1rem;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
-	gap: 2rem;
-}
-
-.ill {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  top: 50%;
-  right: 5rem;
-	translate: 0 -50% ;
-}
+	/* justify-content: center; */
+	margin-top: 40px;
+	min-height: 100vh;
+	/* background: linear-gradient(135deg, #ff7e5f, #feb47b); */
+	font-family: 'Roboto', sans-serif;
+	padding: 0px 20px;
+	box-sizing: border-bo
+  }
+  
+  .loginContainer {
+	background: rgba(255, 255, 255, 0.9);
+	padding: 40px;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	max-width: 400px;
+	width: 100%;
+	animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+	from {
+	  opacity: 0;
+	  transform: translateY(20px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+  
+  .loginContainer h2 {
+	margin-bottom: 20px;
+	font-size: 28px;
+	color: #333;
+	font-weight: 700;
+  }
+  
+  .btnContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin-top: 20px;
+  }
+  
+  .loginButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.3s ease;
+	font-size: 16px;
+	font-weight: 500;
+	color: #fff;
+  }
+  
+  .loginButton svg {
+	margin-right: 10px;
+	font-size: 22px;
+  }
+   
+  .ill {
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+  }
+  
+  .ill img {
+	max-width: 400px;
+	width: 100%;
+	height: auto;
+	animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+	0%, 100% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-10px);
+	}
+  }
+  

@@ -29,14 +29,14 @@ export default function Login() {
     <div className={styles.container}>
       <div className={styles.loginContainer}>
         <h2>Sign In</h2>
+      <div className={styles.ill}>
+        <img src="/images/login-illustration.svg" alt="" />
+      </div>
         <div className={styles.btnContainer}>
           {btns.map((btn, index) => {
             return <LoginButton {...btn} key={index} />;
           })}
         </div>
-      </div>
-      <div className={styles.ill}>
-        <img src="/images/login-illustration.svg" alt="" />
       </div>
     </div>
   );
