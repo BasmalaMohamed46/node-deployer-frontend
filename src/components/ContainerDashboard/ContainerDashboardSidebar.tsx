@@ -36,6 +36,13 @@ export default function ContainerDashboardSidebar() {
 			text: 'Settings',
 			isActive: false,
 		  },
+		  {
+			routeLink: 'events',
+			text: 'Events',
+			isActive: false,
+		  },
+
+
 	]);
 
 	function handleActive(index: number): void {

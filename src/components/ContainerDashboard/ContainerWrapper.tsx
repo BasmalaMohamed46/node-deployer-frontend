@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import ContainerDashboardSidebar from './ContainerDashboardSidebar';
-import Logo from '../Logo/Logo';
 import Containers from '../Containers/Containers';
 import { ReactNode } from 'react';
 import DockerLogs from '../DockerLogs';
@@ -8,6 +7,7 @@ import Environment from '../Environment/Environment';
 import AnalyticsPage from '../AnalyticsPage';
 import Settings from '../Settings';
 import NotFound from '../NotFound';
+import Event from '../Event';
 
 export default function ContainerWrapper() {
 
@@ -38,6 +38,10 @@ export default function ContainerWrapper() {
     {
       path: "settings",
       element: <Settings />
+    },
+    {
+      path: "events",
+      element: <Event />
     },
     {
       path: "*",
