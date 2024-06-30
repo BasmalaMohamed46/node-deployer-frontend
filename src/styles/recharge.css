@@ -1,11 +1,14 @@
-/* .recharge-btn {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
+.recharge-btn {
+  background-color: white;
+  color: #333;
+  border: 1px solid #333;
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  transition: 0.3s;
 }
 
 .recharge-btn:hover {
   background-color: var(--nav-hover-color);
   color: white;
-  border: none;
-} */
+  border-color: var(--nav-hover-color);
+} 

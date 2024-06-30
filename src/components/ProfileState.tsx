@@ -47,6 +47,12 @@ const ProfileState = () => {
               </Link>
             </li>
             <hr />
+           <li>
+              <Link className="nav-link" to="/recharge">
+                Recharge
+              </Link>
+            </li>
+            <hr />
             <li>
               <button className="nav-link px-4 py-2" onClick={handleLogout}>
                 Logout

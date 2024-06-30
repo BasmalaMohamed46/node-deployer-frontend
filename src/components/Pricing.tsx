@@ -109,7 +109,11 @@ const Pricing = () => {
       tierId: id,
       repoId,
     });
-
+    if (response.status === 201) {
+     const { ipAddress, containerId } = response.data;
+      window.open(`http://${ipAddress}`, '_blank');
+      navigate(`/containers/${containerId}/login`);
+    }
     console.log(response);
   };
 
@@ -144,11 +148,14 @@ const Pricing = () => {
                     </li>
                   </ul>
 
+                {
+                  repoId &&
                   <div className="text-center mt-auto">
                     <Link to="#" className="buy-btn" onClick={() => handleBuyNowClick(tier.id)}>
                       Choose
                     </Link>
                   </div>
+                }
                 </div>
               </div>
             ))}

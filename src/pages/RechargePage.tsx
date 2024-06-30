@@ -15,6 +15,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { axiosInstance } from "../interceptors/auth.interceptor";
 import { setuid } from "process";
+import '../styles/recharge.css'
 
 export default function RechargePage() {
   const [redirectToCheckout, setRedirectToCheckout] = useState(false);
@@ -128,14 +129,12 @@ export default function RechargePage() {
                     </span>
                   </MDBListGroupItem>
                 </MDBListGroup>
-                <MDBBtn
-                  size="lg"
+                <button
                   className="recharge-btn"
-                  block
                   onClick={handleRecharge}
                 >
                   Recharge Balance
-                </MDBBtn>
+                </button>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
