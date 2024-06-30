@@ -56,18 +56,8 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
         <span className="separator"></span>
         <span className="repo-time">{timeDifference}</span>
       </div>
-      {isRepoConnected ? (
-        <button className="connected-button" onClick={() =>
-          onConnect(
-            repoId.toString(),
-            repoUrl,
-            repoName
-          )}>
-          Connected
-        </button>
-      ) : (
         <button 
-          className="connect-button"
+          className={isRepoConnected ? 'connected-button' : 'connect-button'}
           onClick={() =>
           onConnect(
             repoId.toString(),
@@ -75,9 +65,8 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
             repoName
           )
         }>
-            Connect
+            { isRepoConnected ? 'Connected' : 'Connect' }
          </button>
-      )}
     </div>
   );
 };
