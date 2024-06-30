@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import "../../styles/environment.css";
-import { v4 as uuidv4 } from "uuid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import '../../styles/environment.css';
+import { v4 as uuidv4 } from 'uuid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import {
   faPlus,
@@ -9,21 +9,20 @@ import {
   faMagicWandSparkles,
   faTimes,
   faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
-import { EnvVariables } from "../../types/EnvVariables";
-import { useParams } from "react-router-dom";
+} from '@fortawesome/free-solid-svg-icons';
+import { EnvVariables } from '../../types/EnvVariables';
+import { useParams } from 'react-router-dom';
+import { getRepos } from '../../services/ReposService';
 
-const nodeVersions = [
-  "20.14.0",
-  "20.14.1",
-  "20.14.2",
-  "20.14.3",
-];
+const nodeVersions = ['20.14.0', '20.14.1', '20.14.2', '20.14.3'];
 
 function Environment() {
-  const { repoId } = useParams<{ repoId: string }>();
+  const { repoId: repoIdParams } = useParams<{ repoId: string }>();
+  const { id } = useParams();
+  const [repoId, setRepoId] = useState(repoIdParams);
+
   const [variables, setVariables] = useState<EnvVariables[]>([
-    { name: "NAME_OF_VARIABLE", value: "", visible: false },
+    { name: 'NAME_OF_VARIABLE', value: '', visible: false },
   ]);
   const [selectedNodeVersion, setSelectedNodeVersion] = useState<string>(nodeVersions[0]);
   const [error, setError] = useState<string | null>(null);
@@ -35,18 +34,22 @@ function Environment() {
       try {
         const response = await fetch(`http://localhost:3000/environment/${repoId}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         });
 
         if (response.ok) {
+          console.log(response);
+
           const data = await response.json();
           if (data) {
-            setVariables(data.variables.map(({ name, value }) => ({
-              name,
-              value,
-              visible: false,
-            })));
+            setVariables(
+              data.variables.map(({ name, value }) => ({
+                name,
+                value,
+                visible: false,
+              })),
+            );
             setSelectedNodeVersion(data.nodeVersion);
           }
         } else {
@@ -57,6 +60,23 @@ function Environment() {
       }
     };
 
+    async function fetchedData() {
+      const repos = await getRepos();
+      const matchedRepos = repos.find((repo) =>
+        repo.dockerImage?.Containers.some((DockerContainer) => DockerContainer.id === id),
+      );
+
+      console.log(matchedRepos);
+      
+      if (matchedRepos) {
+        const { repoId } = matchedRepos;
+        setRepoId(repoId);
+      }
+      console.log(matchedRepos);
+    }
+    if (!repoId) {
+      fetchedData();
+    }
     fetchData();
   }, [repoId]);
 
@@ -92,32 +112,29 @@ function Environment() {
 
   const handleAddVariable = () => {
     if (
-      variables[variables.length - 1].name === "" ||
-      variables[variables.length - 1].value === ""
+      variables[variables.length - 1].name === '' ||
+      variables[variables.length - 1].value === ''
     ) {
-      setError("Required");
+      setError('Required');
       return;
     }
-    setVariables([
-      ...variables,
-      { name: "NAME_OF_VARIABLE", value: "", visible: false },
-    ]);
+    setVariables([...variables, { name: 'NAME_OF_VARIABLE', value: '', visible: false }]);
     setError(null);
   };
 
   const handleSaveVariables = async () => {
     setLoading(true);
-    console.log("Variables to save:", variables);
+    console.log('Variables to save:', variables);
     const searchParams = new URLSearchParams(window.location.search);
-    const url = decodeURIComponent(searchParams.get("url") || "");
-    const name = decodeURIComponent(searchParams.get("name") || "");
+    const url = decodeURIComponent(searchParams.get('url') || '');
+    const name = decodeURIComponent(searchParams.get('name') || '');
 
     try {
-      const response = await fetch("http://localhost:3000/environment", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/environment', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
         body: JSON.stringify({
           repoId,
@@ -125,7 +142,7 @@ function Environment() {
           url,
           variables: variables.map(({ name, value }) => ({ name, value })),
           nodeVersion: selectedNodeVersion,
-          event: "push",
+          event: 'push',
         }),
       });
 
@@ -136,23 +153,23 @@ function Environment() {
         const responseWebhook = await fetch(
           `http://localhost:3000/dashboard/${provider}/webhooks`,
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             },
             body: JSON.stringify({
               webhookUrl: webhookUrl,
               repoId: repoId,
             }),
-          }
+          },
         );
         console.log(responseWebhook);
       }
       console.log(result.id);
-      navigate(`/pricing/${result.id}`)
+      navigate(`/pricing/${result.id}`);
     } catch (error) {
-      console.error("Save Environment Variable error:", error);
+      console.error('Save Environment Variable error:', error);
     } finally {
       setLoading(false);
     }
@@ -162,12 +179,13 @@ function Environment() {
     <div className="container Environment">
       <h2 className="mb-4">Environment Variables</h2>
       <p>
-        Environment variables are key-value pairs that are used to configure an
-        application. <br /> They are used to store sensitive data like API keys,
-        database passwords, etc.
+        Environment variables are key-value pairs that are used to configure an application. <br />{' '}
+        They are used to store sensitive data like API keys, database passwords, etc.
       </p>
       <div className="node-version-selector">
-        <label htmlFor="node-version" className="form-label">Select Node Version:</label>
+        <label htmlFor="node-version" className="form-label">
+          Select Node Version:
+        </label>
         <select
           id="node-version"
           value={selectedNodeVersion}
@@ -175,7 +193,9 @@ function Environment() {
           className="form-select"
         >
           {nodeVersions.map((version) => (
-            <option key={version} value={version}>{version}</option>
+            <option key={version} value={version}>
+              {version}
+            </option>
           ))}
         </select>
       </div>
@@ -188,16 +208,13 @@ function Environment() {
               onChange={(e) => handleNameChange(index, e.target.value)}
             />
             <input
-              type={variable.visible ? "text" : "password"}
+              type={variable.visible ? 'text' : 'password'}
               value={variable.value}
               onChange={(e) => handleValueChange(index, e.target.value)}
               onFocus={() => toggleVisibility(index, true)}
               onBlur={() => toggleVisibility(index, false)}
             />
-            <button
-              className="btn btn-generate"
-              onClick={() => generateRandomValue(index)}
-            >
+            <button className="btn btn-generate" onClick={() => generateRandomValue(index)}>
               <FontAwesomeIcon icon={faMagicWandSparkles} /> Generate
             </button>
             <button className="btn" onClick={() => deleteVariable(index)}>
@@ -220,7 +237,7 @@ function Environment() {
             <FontAwesomeIcon icon={faSpinner} spin /> Saving...
           </>
         ) : (
-          "Save"
+          'Save'
         )}
       </button>
     </div>
