@@ -57,7 +57,12 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo, onConnect, reposUrl  }) => {
         <span className="repo-time">{timeDifference}</span>
       </div>
       {isRepoConnected ? (
-        <button className="connected-button" disabled>
+        <button className="connected-button" onClick={() =>
+          onConnect(
+            repoId.toString(),
+            repoUrl,
+            repoName
+          )}>
           Connected
         </button>
       ) : (

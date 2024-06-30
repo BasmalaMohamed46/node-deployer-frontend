@@ -30,6 +30,36 @@ function Environment() {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/environment/${repoId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data) {
+            setVariables(data.variables.map(({ name, value }) => ({
+              name,
+              value,
+              visible: false,
+            })));
+            setSelectedNodeVersion(data.nodeVersion);
+          }
+        } else {
+          console.error('Failed to fetch existing environment variables');
+        }
+      } catch (error) {
+        console.error('Error fetching environment variables:', error);
+      }
+    };
+
+    fetchData();
+  }, [repoId]);
+
   const generateRandomValue = (index: number) => {
     const newVariables = [...variables];
     newVariables[index].value = uuidv4();
@@ -98,27 +128,27 @@ function Environment() {
           event: "push",
         }),
       });
-      const webhookUrl = import.meta.env.VITE_WEBHOOKURL;
-      console.log(webhookUrl);
-      
-      const provider = localStorage.getItem('provider');
-      const result = await response.json();
-      const responseWebhook = await fetch(
-        `http://localhost:3000/dashboard/${provider}/webhooks`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          body: JSON.stringify({
-            webhookUrl: webhookUrl,
-            repoId: repoId,
-          }),
-        }
-      );
 
-      console.log(responseWebhook);
+      const result = await response.json();
+      if (!result) {
+        const webhookUrl = import.meta.env.VITE_WEBHOOKURL;
+        const provider = localStorage.getItem('provider');
+        const responseWebhook = await fetch(
+          `http://localhost:3000/dashboard/${provider}/webhooks`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify({
+              webhookUrl: webhookUrl,
+              repoId: repoId,
+            }),
+          }
+        );
+        console.log(responseWebhook);
+      }
       console.log(result.id);
       navigate(`/pricing/${result.id}`)
     } catch (error) {
