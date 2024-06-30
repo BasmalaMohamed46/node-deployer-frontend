@@ -1,47 +1,52 @@
-import { useState, useEffect } from "react";
-import "../styles/event.css";
-import { EventResponse } from "../types/eventResponse";
-import axios from "axios";
-import Commit from "../components/Commit";
-import { CommitType } from "../types/commit";
-import { axiosInstance } from "../interceptors/auth.interceptor";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import '../styles/event.css';
+import { EventResponse } from '../types/eventResponse';
+import axios from 'axios';
+import Commit from '../components/Commit';
+import { CommitType } from '../types/commit';
+import { useParams } from 'react-router-dom';
+import { getRepos } from '../services/ReposService';
 
 function Event() {
   const [data, setData] = useState<EventResponse | null>(null);
-  const accessToken = localStorage.getItem("accessToken");
-  const { id } = useParams()
-  const [repoId, setRepoId] = useState<number>(0);
+  const accessToken = localStorage.getItem('accessToken');
+  const { id } = useParams();
 
   const fetchCommitData = async (repoId: string) => {
     try {
-        const response = await axios.get<EventResponse>(
+      const response = await axios.get<EventResponse>(
         `http://localhost:3000/dashboard/commits/${repoId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       );
       // setData(response.data);
-      console.log("response", response.data);
-      console.log("response", response.data);
+      console.log('response', response.data);
+      console.log('response', response.data);
     } catch (error) {
-      console.error("Error fetching commit data:", error);
+      console.error('Error fetching commit data:', error);
     }
   };
 
   useEffect(() => {
-    axiosInstance.get(`/docker/containers/${id}`).then(res => {
-      setRepoId(res.data);
-      console.log(res.data);
-      
-    }).catch(e => {
-        console.log('error', e);
-    });
-    // fetchCommitData("667f9f3d8a1039b2c1e7229d");
-  }, []);
+    async function fetchedData() {
+      const repos = await getRepos();
+      const matchedRepos = repos.find((repo) =>
+        repo.dockerImage?.Containers.some((DockerContainer) => DockerContainer.id === id),
+      );
 
+      if (matchedRepos) {
+        console.log(matchedRepos);
+        const { repoId } = matchedRepos;
+        fetchCommitData(repoId);
+      }
+      console.log(matchedRepos);
+    }
+
+    fetchedData();
+  }, []);
 
   return (
     <div className="event-wrapper">

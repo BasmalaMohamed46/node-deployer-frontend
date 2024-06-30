@@ -10,4 +10,5 @@ export interface Repo {
   };
   path: string;
   clone_url: string;
+  repoId: string;
 }

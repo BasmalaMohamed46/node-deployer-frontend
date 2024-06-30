@@ -98,7 +98,9 @@ function Environment() {
           event: "push",
         }),
       });
-      const webhookUrl = import.meta.env.WEBHOOKURL;
+      const webhookUrl = import.meta.env.VITE_WEBHOOKURL;
+      console.log(webhookUrl);
+      
       const provider = localStorage.getItem('provider');
       const result = await response.json();
       const responseWebhook = await fetch(
