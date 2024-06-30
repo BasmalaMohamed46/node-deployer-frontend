@@ -4,14 +4,18 @@ import { EventResponse } from "../types/eventResponse";
 import axios from "axios";
 import Commit from "../components/Commit";
 import { CommitType } from "../types/commit";
+import { axiosInstance } from "../interceptors/auth.interceptor";
+import { useParams } from "react-router-dom";
 
 function Event() {
   const [data, setData] = useState<EventResponse | null>(null);
   const accessToken = localStorage.getItem("accessToken");
+  const { id } = useParams()
+  const [repoId, setRepoId] = useState<number>(0);
 
   const fetchCommitData = async (repoId: string) => {
     try {
-      const response = await axios.get<EventResponse>(
+        const response = await axios.get<EventResponse>(
         `http://localhost:3000/dashboard/commits/${repoId}`,
         {
           headers: {
@@ -19,7 +23,7 @@ function Event() {
           },
         }
       );
-      setData(response.data);
+      // setData(response.data);
       console.log("response", response.data);
       console.log("response", response.data);
     } catch (error) {
@@ -28,8 +32,14 @@ function Event() {
   };
 
   useEffect(() => {
-    fetchCommitData("667f9f3d8a1039b2c1e7229d");
+    axiosInstance.get(`/docker/containers/${id}`).then(res => {
+      setRepoId(res.data);
+    }).catch(e => {
+        console.log('error', e);
+    });
+    // fetchCommitData("667f9f3d8a1039b2c1e7229d");
   }, []);
+
 
   return (
     <div className="event-wrapper">
