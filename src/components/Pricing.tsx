@@ -5,6 +5,10 @@ import { axiosInstance } from '../interceptors/auth.interceptor';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Tier {
   id: string;
@@ -16,6 +20,7 @@ interface Tier {
 
 const Pricing = () => {
   const [balance, setBalance] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +51,7 @@ const Pricing = () => {
           .then(() => {
             setBalance(newBalance);
             alert('Tier Successfully Bought');
-            navigate('/'); // Redirect to home or desired route
+            navigate('/'); 
           })
           .catch((err) => {
             console.log(err);
@@ -54,7 +59,7 @@ const Pricing = () => {
       }
     } else {
       alert('Not enough balance');
-      navigate('/recharge'); // Redirect to recharge page
+      navigate('/recharge'); 
     }
   };
 
@@ -91,6 +96,7 @@ const Pricing = () => {
   console.log('Tier data:', tiers);
 
   const handleBuyNowClick = async (id: string) => {
+    setLoading(true);
     console.log('Selected Tier ID:', id);
     console.log('Selected repo ID:', repoId);
     console.log('Tier access Token:', localStorage.getItem('accessToken'));
@@ -105,16 +111,23 @@ const Pricing = () => {
     //     repoId,
     //   }),
     // });
-    const response = await axiosInstance.post('/deploy/container', {
-      tierId: id,
-      repoId,
-    });
-    if (response.status === 201) {
-     const { ipAddress, containerId } = response.data;
-      window.open(`http://${ipAddress}`, '_blank');
-      navigate(`/containers/${containerId}/login`);
+
+    try{
+      const response = await axiosInstance.post('/deploy/container', {
+        tierId: id,
+        repoId,
+      });
+      if (response.status === 201) {
+       const { ipAddress, containerId } = response.data;
+        window.open(`http://${ipAddress}`, '_blank');
+        navigate(`/containers/${containerId}/login`);
+      }
+      console.log(response);
+    }catch(err){
+      console.log(err);
+    }finally{
+      setLoading(false);
     }
-    console.log(response);
   };
 
   return (
@@ -152,7 +165,14 @@ const Pricing = () => {
                   repoId &&
                   <div className="text-center mt-auto">
                     <Link to="#" className="buy-btn" onClick={() => handleBuyNowClick(tier.id)}>
-                      Choose
+                      
+                      {loading ? (
+                        <>
+                          <FontAwesomeIcon icon={faSpinner} spin /> Choose
+                        </>
+                      ) : (
+                        'Choose'
+                      )}
                     </Link>
                   </div>
                 }
