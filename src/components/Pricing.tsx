@@ -1,6 +1,6 @@
 import "../styles/pricing.css";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../interceptors/auth.interceptor";
 import { jwtDecode } from "jwt-decode";
 

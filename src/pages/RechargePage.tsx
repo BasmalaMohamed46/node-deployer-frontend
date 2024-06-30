@@ -28,7 +28,10 @@ export default function RechargePage() {
     const accessToken: string | null = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      const { id, email } = jwtDecode(accessToken);
+      const { id, email } = jwtDecode(accessToken) as {
+        id: string;
+        email: string;
+      };
       setUid(id);
       setEmail(email);
     }
@@ -42,7 +45,7 @@ export default function RechargePage() {
           price: Number(price),
           description: "Balance Recharge",
           user_id: uid,
-          urlSuccess: "http://localhost:3000/payment/success",
+          urlSuccess: "http://localhost:5173/",
           urlCancel: "http://localhost:3000/payment/cancel",
           email: email,
         }
