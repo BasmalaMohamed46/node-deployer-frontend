@@ -1,7 +1,53 @@
 import "../styles/pricing.css";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosInstance } from "../interceptors/auth.interceptor";
+import { jwtDecode } from "jwt-decode";
 
 const Pricing = () => {
+  const [balance, setBalance] = useState<number>(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken: string | null = localStorage.getItem("accessToken");
+
+    if (accessToken) {
+      const { id } = jwtDecode(accessToken) as { id: string };
+      axiosInstance
+        .get(`/user/${id}`)
+        .then((res) => {
+          const { balance } = res.data;
+          setBalance(balance);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  const buy = (price: number) => {
+    if (balance >= price) {
+      const newBalance = balance - price;
+      const accessToken: string | null = localStorage.getItem("accessToken");
+      if (accessToken) {
+        const { id } = jwtDecode(accessToken) as { id: string };
+        axiosInstance
+          .put(`/user/${id}`, { balance: newBalance })
+          .then(() => {
+            setBalance(newBalance);
+            alert("Tier Successfully Bought");
+            navigate("/"); // Redirect to home or desired route
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      alert("Not enough balance");
+      navigate("/recharge"); // Redirect to recharge page
+    }
+  };
+
   return (
     <section id="pricing" className="pricing section">
       {/* <!-- Section Title --> */}
@@ -19,6 +65,7 @@ const Pricing = () => {
           <div className="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div className="pricing-item">
               <div className="pricing-header">
+                {/* Plan Price */}
                 <h3>Free Plan</h3>
                 <h4>
                   <sup>$</sup>0<span> / month</span>
@@ -47,11 +94,11 @@ const Pricing = () => {
                   <span>Massa ultricies mi quis hendrerit</span>
                 </li>
               </ul>
-
+              {/* Buy Button */}
               <div className="text-center mt-auto">
-                <Link to="#" className="buy-btn ">
+                <button onClick={() => buy(0)} className="buy-btn ">
                   Buy Now
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -90,9 +137,9 @@ const Pricing = () => {
               </ul>
 
               <div className="text-center mt-auto">
-                <a href="#" className="buy-btn">
+                <button onClick={() => buy(29)} className="buy-btn ">
                   Buy Now
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -129,11 +176,10 @@ const Pricing = () => {
                   <span>Massa ultricies mi quis hendrerit</span>
                 </li>
               </ul>
-
               <div className="text-center mt-auto">
-                <a href="#" className="buy-btn">
+                <button onClick={() => buy(49)} className="buy-btn ">
                   Buy Now
-                </a>
+                </button>
               </div>
             </div>
           </div>
