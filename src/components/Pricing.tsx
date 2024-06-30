@@ -1,5 +1,9 @@
 import "../styles/pricing.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../interceptors/auth.interceptor";
+import { jwtDecode } from "jwt-decode";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -12,6 +16,49 @@ interface Tier {
 }
 
 const Pricing = () => {
+  const [balance, setBalance] = useState<number>(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken: string | null = localStorage.getItem("accessToken");
+
+    if (accessToken) {
+      const { id } = jwtDecode(accessToken) as { id: string };
+      axiosInstance
+        .get(`/user/${id}`)
+        .then((res) => {
+          const { balance } = res.data;
+          setBalance(balance);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  const buy = (price: number) => {
+    if (balance >= price) {
+      const newBalance = balance - price;
+      const accessToken: string | null = localStorage.getItem("accessToken");
+      if (accessToken) {
+        const { id } = jwtDecode(accessToken) as { id: string };
+        axiosInstance
+          .put(`/user/${id}`, { balance: newBalance })
+          .then(() => {
+            setBalance(newBalance);
+            alert("Tier Successfully Bought");
+            navigate("/"); // Redirect to home or desired route
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      alert("Not enough balance");
+      navigate("/recharge"); // Redirect to recharge page
+    }
+  };
+
   const [tiers, setTiers] = useState<Tier>(); 
   const searchParams = new URLSearchParams(window.location.search);
   const repoId = decodeURIComponent(searchParams.get("repoId") || "");
@@ -75,6 +122,15 @@ const Pricing = () => {
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row gy-4">
+          <div className="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div className="pricing-item">
+              <div className="pricing-header">
+                {/* Plan Price */}
+                <h3>Free Plan</h3>
+                <h4>
+                  <sup>$</sup>0<span> / month</span>
+                </h4>
+              </div>
           {tiers.map((tier, index) => (
             <div
               className="col-lg-4"
@@ -91,7 +147,6 @@ const Pricing = () => {
                     <span> / month</span>
                   </h4>
                 </div>
-
                 <ul>
                   <li className="">
                     <i className="bi bi-dot"></i>
@@ -114,8 +169,8 @@ const Pricing = () => {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        </div>)}
       </div>
     </section>
   );

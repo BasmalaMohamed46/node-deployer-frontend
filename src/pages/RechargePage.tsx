@@ -10,15 +10,32 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import NavBar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { axiosInstance } from "../interceptors/auth.interceptor";
+import { setuid } from "process";
 
 export default function RechargePage() {
   const [redirectToCheckout, setRedirectToCheckout] = useState(false);
   const [checkoutUrl, setCheckoutUrl] = useState("");
+
   const [price, setPrice] = useState(""); // State to hold the price
   const [email, setEmail] = useState(""); // State to hold the email
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    const accessToken: string | null = localStorage.getItem("accessToken");
+
+    if (accessToken) {
+      const { id, email } = jwtDecode(accessToken) as {
+        id: string;
+        email: string;
+      };
+      setUid(id);
+      setEmail(email);
+    }
+  }, []);
 
   const handleRecharge = async () => {
     try {
@@ -27,8 +44,8 @@ export default function RechargePage() {
         {
           price: Number(price),
           description: "Balance Recharge",
-          user_id: "108169772",
-          urlSuccess: "http://localhost:3000/payment/success",
+          user_id: uid,
+          urlSuccess: "http://localhost:5173/",
           urlCancel: "http://localhost:3000/payment/cancel",
           email: email,
         }
@@ -50,9 +67,9 @@ export default function RechargePage() {
   if (redirectToCheckout) {
     window.location.href = checkoutUrl;
   }
+
   return (
     <>
-      <NavBar />
       <div className="mx-auto mt-5" style={{ maxWidth: "900px" }}>
         <MDBRow>
           <MDBCol md="8" className="mb-4">
