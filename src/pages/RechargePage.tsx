@@ -52,9 +52,9 @@ export default function RechargePage() {
       );
 
       const data = response.data;
-      console.log(data);
-      if (data.url) {
-        setCheckoutUrl(data.url);
+      console.log('url', data);
+      if (data) {
+        setCheckoutUrl(data);
         setRedirectToCheckout(true);
       } else {
         console.error("No URL in response");

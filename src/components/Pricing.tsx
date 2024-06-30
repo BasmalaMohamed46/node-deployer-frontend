@@ -122,7 +122,6 @@ const Pricing = () => {
 
       <div className="container">
         <div className="row gy-4">
-          <div className="col-lg-4">
             {tiers.map((tier, index) => (
               <div className="col-lg-4" key={tier.id}>
                 <div className={`pricing-item ${index === 1 ? 'featured' : ''}`}>
@@ -155,7 +154,6 @@ const Pricing = () => {
             ))}
           </div>
         </div>
-      </div>
     </section>
   );
 };

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import AnalyticsGraph from './AnalyticsGraph';
 
 const AnalyticsPage: React.FC = () => {
-  const { containerId } = useParams<{ containerId: string }>();
+  const { id: containerId } = useParams();
   const [interval, setInterval] = useState<string>('lastHour');
 
   const handleIntervalChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,7 +25,9 @@ const AnalyticsPage: React.FC = () => {
       </div>
       <div className="row">
         <div className="col-lg-12">
-          <AnalyticsGraph containerId={containerId} interval={interval} />
+          {
+            containerId && <AnalyticsGraph containerId={containerId} interval={interval} />
+          }
         </div>
       </div>
     </div>

@@ -21,7 +21,6 @@ import Containers from './components/Containers/Containers.tsx';
 import OneContainer from './components/One Container/OneContainer.tsx';
 import NavBar from './components/Navbar.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
-import Event from "./components/Event.tsx";
 
 function App() {
   return (
@@ -34,9 +33,9 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/pricing/:repoId" element={<PricingPage />} />
+            <Route path="/pricing/" element={<PricingPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/contact" element={<ContactPage />} />
-
             <Route path="/recharge" element={<RechargePage />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/dashboard" element={<Dashboard />} />

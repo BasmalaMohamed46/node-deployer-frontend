@@ -4,7 +4,7 @@ import { LogEntry, fetchLogs } from '../services/loggingService';
 import { useParams } from 'react-router-dom';
 
 const DockerLogs: React.FC = () => {
-  const { containerId } = useParams<{ containerId: string }>();
+  const { id: containerId } = useParams();
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,8 +14,11 @@ const DockerLogs: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        const logsData = await fetchLogs(containerId);
-        setLogs(logsData);
+        if (containerId) {
+          const logsData = await fetchLogs(containerId);
+          
+          setLogs(logsData);
+        }
       } catch (error) {
         setError('Failed to fetch logs. Please try again later.');
       } finally {
