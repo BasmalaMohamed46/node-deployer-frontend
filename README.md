@@ -135,4 +135,6 @@ The `.env` file should contain the following variables:
 
 Explore a comprehensive demonstration of WeBuild in action via the following video:
 
+[![WeBuild Demo](https://img.youtube.com/vi/UXnWZMVCsUc/0.jpg)](https://youtu.be/UXnWZMVCsUc)
+
 
